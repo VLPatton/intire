@@ -1,0 +1,20 @@
+{
+    "HDD": {
+        "template": {
+            "name": {
+                "type": "kSTRING",
+                "pretty_name": "Name",
+                "suffix": ""
+            },
+            "size": {
+                "type": "kINT",
+                "pretty_name": "Size (in GB)",
+                "suffix": " GB"
+            }
+        },
+        "0": {
+            "name": "disk",
+            "size": 1000
+        }
+    }
+}

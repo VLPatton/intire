@@ -1,0 +1,11 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# clangd cache directory
+.cache
+
+# Ignore Gradle build output directory
+build
+
+# Lang server compile DB
+compile_commands.json
