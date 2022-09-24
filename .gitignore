@@ -8,4 +8,4 @@
 build
 
 # Lang server compile DB
-compile_commands.json
+*.json
