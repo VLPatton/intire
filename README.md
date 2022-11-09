@@ -7,8 +7,9 @@ None
 ## Completed Tasks
 * Read JSON file using `nlohmann::json`
 * Print IDs within a Category class with proper formatting according to the Category's template object
+* Ability to execute tasks based on CLI switches
 ## TODO
-* Implement CLI ability
+* Implement CLI functionality
     - `-a | --add`
     - `-s | --with-scanner`
     - `-r | --remove`
