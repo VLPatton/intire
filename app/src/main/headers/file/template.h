@@ -18,6 +18,7 @@ not, see <https://www.gnu.org/licenses/>.
 */
 
 #include <map>
+#include <memory>
 #include <nlohmann/json.hpp>
 #include <string>
 #include <sstream>
@@ -52,11 +53,11 @@ namespace file {
         private:
             std::string category;
             std::string currentID;
-            std::stringstream* output;
-            std::vector<std::string>* allIDs;
-            std::vector<std::string>* keys;
-            std::map<std::string, int>* keytypes;
-            std::map<std::string, int>* availtypes;
+            std::stringstream output;
+            std::unique_ptr<std::vector<std::string>> allIDs;
+            std::unique_ptr<std::vector<std::string>> keys;
+            std::unique_ptr<std::map<std::string, int>> keytypes;
+            std::unique_ptr<std::map<std::string, int>> availtypes;
             nlohmann::json data_template;
             nlohmann::json data;
     };

@@ -17,4 +17,13 @@ plugins {
 // Set the target operating system and architecture for this application
 application {
     targetMachines.add(machines.linux.x86_64)
+    //binaries.configureEach(CppCompile) {
+    //    compileTask.get().compilerArgs.addAll(["-std=gnu++17", "-Wall", "-Wextra"])
+    //}
 }
+
+tasks.withType(CppCompile).configureEach {
+    compilerArgs.addAll(["-std=gnu++17", "-Wall", "-Wextra", "-D_INTIRE_VER=\"" + version + "\""])
+}
+
+version="0.0.2-rc0"

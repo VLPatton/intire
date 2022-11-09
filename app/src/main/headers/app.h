@@ -21,16 +21,20 @@ not, see <https://www.gnu.org/licenses/>.
 #define APP_H
 
 #include <string>
+#include <vector>
+#include "user/Parser.h"
 #include "file/reader.h"
 
 namespace intire {
     class Process {
         public:
-            Process();
+            Process(int argc, char* argv[]);
             int useListFile(std::string);
-            file::Reader* items;
+            int exec(); 
         private:
-            std::string listfile; 
+            user::Parser parser;
+            std::string listfile{"items.json"};
+            file::Reader items{listfile};
     };
 }
 

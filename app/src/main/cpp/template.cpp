@@ -26,17 +26,17 @@ file::Category::Category(std::string cat, file::Reader reader) {
     data_template = reader.data[category]["template"];  // Find the template JSON object
     
     // Iterate through the items within the template object until all base keys are found
-    keys = new std::vector<std::string>();
+    keys = std::make_unique<std::vector<std::string>>();
     for (const auto& elements : data_template.items()) {
         keys->push_back(elements.key());
     }
 
-    availtypes = new std::map<std::string, int>();
+    availtypes = std::make_unique<std::map<std::string, int>>();
     (*availtypes)["kINT"] = kINT;
     (*availtypes)["kSTRING"] = kSTRING;
     (*availtypes)["kDOUBLE"] = kDOUBLE;
 
-    allIDs = new std::vector<std::string>();
+    allIDs = std::make_unique<std::vector<std::string>>();
     for (const auto& ids : data.items()) {
         if (ids.key() != "template")
             allIDs->push_back(ids.key());
@@ -44,32 +44,32 @@ file::Category::Category(std::string cat, file::Reader reader) {
 }
 
 std::string file::Category::pprint() {
-    output = new std::stringstream();
+    output = std::stringstream();
 
-    for (int i = 0; i < allIDs->size(); i++) {
+    for (unsigned int i = 0; i < allIDs->size(); i++) {
         setID((*allIDs)[i]);
         //std::printf("[D] file::Category::pprint() : (*allIDs)[i] == \"%s\"\n", (*allIDs)[i].c_str()); // NOTE: for debug
-        *output << "Current ID: " << (*allIDs)[i] << ":\n";
-        for (int j = 0; j < keys->size(); j++) {
+        output << "Current ID: " << (*allIDs)[i] << ":\n";
+        for (unsigned int j = 0; j < keys->size(); j++) {
             //std::printf("[D] file::Category::pprint() : (*keys)[j] == \"%s\"\n", (*keys)[j].c_str()); // NOTE: for debug
             switch ((*availtypes)[data_template[(*keys)[j]]["type"]]) {
                 case kINT:
-                    *output << "    " << getPrettyName((*keys)[j]) << ": " 
+                    output << "    " << getPrettyName((*keys)[j]) << ": " 
                     << getInt((*keys)[j]) << getSuffix((*keys)[j]) << "\n";
                     break;
                 case kSTRING:
-                    *output << "    " << getPrettyName((*keys)[j]) << ": "
+                    output << "    " << getPrettyName((*keys)[j]) << ": "
                     << getStr((*keys)[j]) << getSuffix((*keys)[j]) << "\n";
                     break;
                 case kDOUBLE:
-                    *output << "    " << getPrettyName((*keys)[j]) << ": "
+                    output << "    " << getPrettyName((*keys)[j]) << ": "
                     << getDouble((*keys)[j]) << getSuffix((*keys)[j]) << "\n";
                     break;
             }
         }
     }
 
-    return output->str();
+    return output.str();
 }
 
 int file::Category::setID(std::string id) {
